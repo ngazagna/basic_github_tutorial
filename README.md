@@ -13,8 +13,7 @@ Then, you would like to *add* the file to the index of git and then to *commit* 
 $ git add file1.txt
 $ git status
 > On branch master
-> Your branch is ahead of 'origin/master' by 1 commit.
->   (use "git push" to publish your local commits)
+> Your branch is up to date with 'origin/master'.
 >
 > Untracked files:
 >   (use "git add <file>..." to include in what will be committed)
