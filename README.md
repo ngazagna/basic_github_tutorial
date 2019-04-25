@@ -11,7 +11,19 @@ $ echo "Toto goes to the beach" > file1.txt
 Then, you would like to *add* the file to the index of git and then to *commit* this change, which means to record changes to the repository.
 ```bash
 $ git add file1.txt
+$ git status
+> On branch master
+> Your branch is ahead of 'origin/master' by 1 commit.
+>   (use "git push" to publish your local commits)
+>
+> Untracked files:
+>   (use "git add <file>..." to include in what will be committed)
+>
+> 	 file1.txt
+>
+> nothing added to commit but untracked files present (use "git add" to track)
 $ git commit -m "new file created"
+>
 ```
 Note that you should always try to write clear and concise commit messages (after the `-m` argument) in order to make life easier for you co-workers.
 
