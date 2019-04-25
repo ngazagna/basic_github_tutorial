@@ -156,15 +156,47 @@ $ git push
 >    9ba0afa..aa77bbf  master -> master
 ```
 
-*Remark*: if the conflict file has not been modified by the `git pull` command such that the markers  `<<<<<<< HEAD`, `=======` and `>>>>>>>` appear (and if nothing has been commited), try to do the following to retry another merge.
+*Remark1*: if the conflict file has not been modified by the `git pull` command such that the markers  `<<<<<<< HEAD`, `=======` and `>>>>>>>` do not appear (and if nothing has been commited), try to do the following to retry another merge.
 ```bash
 $ git merge --abort
 $ git pull
 ```
 
+*Remark2*: instead of `git pull` you can also use `git fetch` then `git diff master origin/master` to see what are the differences. It does not change you local file.
 
+## Going back to a certain commit
+If you prefer the original sentence you wrote. You can come back to the corresponding commit. Let's have a look at previous commit.
+```bash
+$ git reflog
+> aa77bbf (HEAD -> master) HEAD@{0}: commit (merge): merging John update and mine
+> 5feb06a HEAD@{1}: commit: beach -> mall
+> 1b3899a HEAD@{2}: pull: Fast-forward
+> b3b2b99 HEAD@{3}: reset: moving to HEAD
+> b3b2b99 HEAD@{4}: commit (initial): new file created
+```
+So, if you want to definitively come back to the version corresponding to commit `b3b2b99` just perform the following command
+```bash
+$ git reset --hard b3b2b99
+```
+*Warning*: this will destroy all your local changes, so don't do it if you have uncommited changes that you want to keep.
 
+See [this post](https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit) for more details.
 
-## Some useful things to know
+## Ignoring files
+When coding, you might have some auxillary files automatically generated when compiling (e.g., _.aux_ files in LaTeX). If you don't want to share/*track* these files with your co-workers, so you should tell `Git` to *ignore* them. Imagine you want to ignore a file _temp.aux_, you should create a `.gitignore` file in your repository (if it does not already exists) containing its name.
+```bash
+$ echo "temp.aux" > .gitignore
+```
+- You can also ignore files in subfolders by precising the path (starting from your working directory) of the files you want to ignore.
+- You can ignore all the _.aux_ files by adding the line `*.aux` to you `.gitignore` file.
+- You can add exceptions by placing an `!` before the name of file. For instance if you want to track _file_to_track.aux_ but not the other _.aux_ files, you `.gitignore` should contain
+```
+*.aux
+!file_to_track.aux
+```
 
-undo `git add` before commit -> `git reset <file>`
+## Some useful commands
+- show current HEAD and its ancestry: `git log`
+- show an ordered list of commits that HEAD has pointed to: `git reflog`
+- git add several modified files that are tracked (see comment on `.gitignore`): `git add .`
+- undo `git add <file>` before commit -> `git reset <file>`
