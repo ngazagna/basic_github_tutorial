@@ -8,9 +8,8 @@ Imagine you decide to *create* a new file called _file1.txt_ and you want to sha
 ```bash
 $ echo "Toto goes to the beach" > file1.txt
 ```
-Then, you would like to *add* the file to the index of git and then to *commit* this change, which means to record changes to the repository.
+Then, you would like to *add* the file to the index of git
 ```bash
-$ git add file1.txt
 $ git status
 > On branch master
 > Your branch is up to date with 'origin/master'.
@@ -21,6 +20,13 @@ $ git status
 > 	 file1.txt
 >
 > nothing added to commit but untracked files present (use "git add" to track)
+$ git add file1.txt
+>
+```
+Then you should *commit* this change, which means to record changes to the repository.
+```bash
+$ git status
+
 $ git commit -m "new file created"
 >
 ```
